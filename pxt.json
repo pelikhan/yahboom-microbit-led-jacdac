@@ -1,0 +1,30 @@
+{
+    "name": "yahboom-microbit-led-jacdac",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "jacdac": "github:microsoft/pxt-jacdac#v0.10.5",
+        "jacdac-led": "github:microsoft/pxt-jacdac/led#v0.10.5",
+        "neopixel": "github:Microsoft/pxt-neopixel#v0.7.3",
+        "ws2812b": "github:microsoft/pxt-ws2812b#v0.1.1",
+        "jacdac-sound-level": "github:microsoft/pxt-jacdac/sound-level#v0.10.5"
+    },
+    "files": [
+        "main.ts",
+        "README.md",
+        "test.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "target": "4.1.26",
+        "targetId": "microbit"
+    },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj"
+}
