@@ -16,6 +16,8 @@ namespace servers {
     class LedServer extends jacdac.Server {
         pixels: Buffer
         numPixels: number
+        brightness: number
+        actualBrightness: number
         pin: DigitalPin
         maxPower: number
 
@@ -24,6 +26,8 @@ namespace servers {
 
             this.pin = pin
             this.numPixels = numPixels
+            this.brightness = 0.2
+            this.actualBrightness = this.brightness
 
             pins.setPull(this.pin, PinPullMode.PullNone)
             if (bufferMode)
@@ -35,9 +39,16 @@ namespace servers {
         handlePacket(pkt: jacdac.JDPacket) {
             this.handleRegFormat(pkt, jacdac.LedReg.NumPixels, jacdac.LedRegPack.NumPixels, [this.numPixels])
             this.maxPower = this.handleRegUInt32(pkt, jacdac.LedReg.MaxPower, this.maxPower)
-
+            this.brightness = this.handleRegFormat(pkt, jacdac.LedReg.Brightness, jacdac.LedRegPack.Brightness, [this.brightness])[0]
+            this.actualBrightness = this.handleRegFormat(pkt, jacdac.LedReg.ActualBrightness, jacdac.LedRegPack.ActualBrightness, [this.actualBrightness])[0]
             this.handleRegBuffer(pkt, jacdac.LedReg.Pixels, this.pixels)
+
+            this.computeBrightness()
             this.show()
+        }
+
+        computeBrightness() {
+            
         }
 
         show() {
