@@ -8,15 +8,22 @@ const colors = [
 ]
 
 let k = 0
-forever(() => {
+
+function start() {
     modules.yahboomLedRing.setMaxPower(50)
     modules.yahboomSoundLevel.setEnabled(true)
+}
+control.runInParallel(() => start())
+
+forever(() => {
+    led.toggle(2, 2)
     k ++
     const sl = modules.yahboomSoundLevel.soundLevel() || 0
-    const b = 4 + sl
+    const b = 20 + sl
     modules.yahboomLedRing.setBrightness(b)
     for(let i = 0; i < 24; ++i) {
         modules.yahboomLedRing.setPixelColor(i, colors[(k + i) % colors.length])
     }
-    pause(20)
+    modules.yahboomLedRing.show()
+    pause(50)
 })

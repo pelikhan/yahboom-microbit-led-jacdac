@@ -17,14 +17,19 @@ namespace servers {
         jacdac.startSelfServers(() => {
             const pin = DigitalPin.P2
             pins.setPull(pin, PinPullMode.PullNone)
-            const sendPixels = (pixels: Buffer) => ws2812b.sendBuffer(pixels, pin)
+            const sendPixels = (pixels: Buffer) =>
+                ws2812b.sendBuffer(pixels, pin)
 
             const servers = [
-                new LedServer(24, jacdac.LedVariant.Ring, sendPixels),
+                new jacdac.LedServer(
+                    jacdac.LedVariant.Ring,
+                    24,
+                    jacdac.LedPixelLayout.RgbGrb,
+                    sendPixels),
                 jacdac.createSimpleSensorServer(
-                    jacdac.SRV_SOUND_LEVEL, 
-                    jacdac.SoundLevelRegPack.SoundLevel, 
-                    () => Math.clamp(0, 1, pins.analogReadPin(AnalogPin.P1) / 512), 
+                    jacdac.SRV_SOUND_LEVEL,
+                    jacdac.SoundLevelRegPack.SoundLevel,
+                    () => Math.clamp(0, 1, pins.analogReadPin(AnalogPin.P1) / 512),
                     {
                         streamingInterval: 100,
                         enabled: false

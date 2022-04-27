@@ -5,11 +5,11 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "jacdac": "github:microsoft/pxt-jacdac#v0.10.5",
-        "jacdac-led": "github:microsoft/pxt-jacdac/led#v0.10.5",
+        "jacdac": "github:microsoft/pxt-jacdac#v0.10.9",
+        "jacdac-led": "github:microsoft/pxt-jacdac/led#v0.10.9",
         "ws2812b": "github:microsoft/pxt-ws2812b#v0.1.1",
-        "jacdac-sound-level": "github:microsoft/pxt-jacdac/sound-level#v0.10.5",
-        "jacdac-led-server": "github:microsoft/pxt-jacdac/led-server#v0.10.6"
+        "jacdac-sound-level": "github:microsoft/pxt-jacdac/sound-level#v0.10.9",
+        "jacdac-led-server": "github:microsoft/pxt-jacdac/led-server#v0.10.9"
     },
     "files": [
         "main.ts",
