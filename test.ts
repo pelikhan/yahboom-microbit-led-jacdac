@@ -19,11 +19,11 @@ forever(() => {
     led.toggle(2, 2)
     k ++
     const sl = modules.yahboomSoundLevel.soundLevel() || 0
-    const b = 20 + sl
+    const b = 2 + sl
     modules.yahboomLedRing.setBrightness(b)
     for(let i = 0; i < 24; ++i) {
         modules.yahboomLedRing.setPixelColor(i, colors[(k + i) % colors.length])
     }
     modules.yahboomLedRing.show()
-    pause(50)
+    pause(20)
 })

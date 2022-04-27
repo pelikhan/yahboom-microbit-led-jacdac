@@ -17,9 +17,7 @@ namespace servers {
         jacdac.startSelfServers(() => {
             const pin = DigitalPin.P2
             pins.setPull(pin, PinPullMode.PullNone)
-            const sendPixels = (pixels: Buffer) =>
-                ws2812b.sendBuffer(pixels, pin)
-
+            const sendPixels = (pixels: Buffer, brightness: number) => light.sendWS2812BufferWithBrightness(pixels, pin, brightness)
             const servers = [
                 new jacdac.LedServer(
                     jacdac.LedVariant.Ring,
