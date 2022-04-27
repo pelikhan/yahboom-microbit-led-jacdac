@@ -24,7 +24,7 @@ namespace servers {
                 jacdac.createSimpleSensorServer(
                     jacdac.SRV_SOUND_LEVEL, 
                     jacdac.SoundLevelRegPack.SoundLevel, 
-                    () => pins.analogReadPin(AnalogPin.P1) / 1024.0, 
+                    () => Math.clamp(0, 1, pins.analogReadPin(AnalogPin.P1) / 512), 
                     {
                         streamingInterval: 100,
                         enabled: false
