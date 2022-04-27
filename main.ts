@@ -13,62 +13,21 @@ namespace modules {
 }
 
 namespace servers {
-    class LedServer extends jacdac.Server {
-        pixels: Buffer
-        numPixels: number
-        brightness: number
-        actualBrightness: number
-        pin: DigitalPin
-        maxPower: number
-
-        constructor(pin: DigitalPin, numPixels: number, variant: jacdac.LedVariant, bufferMode?: number) {
-            super(jacdac.SRV_LED, { variant: variant })
-
-            this.pin = pin
-            this.numPixels = numPixels
-            this.brightness = 0.2
-            this.actualBrightness = this.brightness
-
-            pins.setPull(this.pin, PinPullMode.PullNone)
-            if (bufferMode)
-                ws2812b.setBufferMode(this.pin, bufferMode)
-            this.pixels = control.createBuffer(this.numPixels * 3)
-            this.maxPower = 50
-        }
-
-        handlePacket(pkt: jacdac.JDPacket) {
-            this.handleRegFormat(pkt, jacdac.LedReg.NumPixels, jacdac.LedRegPack.NumPixels, [this.numPixels])
-            this.maxPower = this.handleRegUInt32(pkt, jacdac.LedReg.MaxPower, this.maxPower)
-            this.brightness = this.handleRegFormat(pkt, jacdac.LedReg.Brightness, jacdac.LedRegPack.Brightness, [this.brightness])[0]
-            this.actualBrightness = this.handleRegFormat(pkt, jacdac.LedReg.ActualBrightness, jacdac.LedRegPack.ActualBrightness, [this.actualBrightness])[0]
-            this.handleRegBuffer(pkt, jacdac.LedReg.Pixels, this.pixels)
-
-            this.computeBrightness()
-            this.show()
-        }
-
-        computeBrightness() {
-            
-        }
-
-        show() {
-            if (this.stateUpdated) {
-                ws2812b.sendBuffer(this.pixels, this.pin)
-                this.stateUpdated = false
-            }
-        }
-    }
-
     function start() {
         jacdac.startSelfServers(() => {
+            const pin = DigitalPin.P2
+            pins.setPull(pin, PinPullMode.PullNone)
+            const sendPixels = (pixels: Buffer) => ws2812b.sendBuffer(pixels, pin)
+
             const servers = [
-                new LedServer(DigitalPin.P2, 24, jacdac.LedVariant.Ring),
+                new LedServer(24, jacdac.LedVariant.Ring, sendPixels),
                 jacdac.createSimpleSensorServer(
                     jacdac.SRV_SOUND_LEVEL, 
                     jacdac.SoundLevelRegPack.SoundLevel, 
                     () => pins.analogReadPin(AnalogPin.P1) / 1024.0, 
                     {
                         streamingInterval: 100,
+                        enabled: false
                     })
             ]
             return servers

@@ -11,7 +11,8 @@ let k = 0
 forever(() => {
     k ++
     const sl = modules.yahboomSoundLevel.soundLevel()
-    modules.yahboomLedRing.setBrightness(0.2 + sl * 0.8)
+    const b = 20 + sl / 100 * 80
+    modules.yahboomLedRing.setBrightness(b)
     for(let i = 0; i < 24; ++i)
         modules.yahboomLedRing.setPixelColor(i, colors[(k + i) % colors.length])
     pause(100)
