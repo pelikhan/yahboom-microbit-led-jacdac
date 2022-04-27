@@ -9,11 +9,13 @@ const colors = [
 
 let k = 0
 forever(() => {
+    modules.yahboomLedRing.setMaxPower(50)
     k ++
     const sl = modules.yahboomSoundLevel.soundLevel()
     const b = 20 + sl / 100 * 80
     modules.yahboomLedRing.setBrightness(b)
-    for(let i = 0; i < 24; ++i)
+    for(let i = 0; i < 24; ++i) {
         modules.yahboomLedRing.setPixelColor(i, colors[(k + i) % colors.length])
+    }
     pause(100)
 })
