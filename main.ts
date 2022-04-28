@@ -14,16 +14,19 @@ namespace modules {
 
 namespace servers {
     function start() {
+        jacdac.productIdentifier = 0x3a509251
+        jacdac.deviceDescription = "Yahboom Microbit-LED"
         jacdac.startSelfServers(() => {
             const pin = DigitalPin.P2
             pins.setPull(pin, PinPullMode.PullNone)
             const sendPixels = (pixels: Buffer, brightness: number) => light.sendWS2812BufferWithBrightness(pixels, pin, brightness)
             const servers = [
                 new jacdac.LedServer(
-                    jacdac.LedVariant.Ring,
                     24,
                     jacdac.LedPixelLayout.RgbGrb,
-                    sendPixels),
+                    sendPixels, {
+                    variant: jacdac.LedVariant.Ring
+                }),
                 jacdac.createSimpleSensorServer(
                     jacdac.SRV_SOUND_LEVEL,
                     jacdac.SoundLevelRegPack.SoundLevel,
