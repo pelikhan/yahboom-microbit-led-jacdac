@@ -6,10 +6,10 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "jacdac": "github:microsoft/pxt-jacdac#v0.10.11",
-        "jacdac-led": "github:microsoft/pxt-jacdac/led#v0.10.11",
-        "jacdac-sound-level": "github:microsoft/pxt-jacdac/sound-level#v0.10.11",
-        "jacdac-led-server": "github:microsoft/pxt-jacdac/led-server#v0.10.11"
+        "jacdac": "github:microsoft/pxt-jacdac#v0.10.14",
+        "jacdac-led": "github:microsoft/pxt-jacdac/led#v0.10.14",
+        "jacdac-sound-level": "github:microsoft/pxt-jacdac/sound-level#v0.10.14",
+        "jacdac-led-server": "github:microsoft/pxt-jacdac/led-server#v0.10.14"
     },
     "files": [
         "main.ts",
