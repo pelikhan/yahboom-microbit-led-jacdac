@@ -36,7 +36,6 @@ namespace servers {
                     },
                     {
                         streamingInterval: 100,
-                        enabled: false
                     })
             ]
             return servers
