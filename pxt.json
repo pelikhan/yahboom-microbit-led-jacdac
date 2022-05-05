@@ -1,6 +1,6 @@
 {
     "name": "yahboom-microbit-led-jacdac",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "",
     "dependencies": {
         "core": "*",
